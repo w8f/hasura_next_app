@@ -1,5 +1,6 @@
 import type { NextPage } from "next";
 import Head from "next/head";
+import Profile from "../components/Profile/Profile";
 
 const Home: NextPage = () => {
   return (
@@ -12,6 +13,9 @@ const Home: NextPage = () => {
 
       <main>
         <h1 className="text-3xl font-bold underline">Hello world!</h1>
+        <a href="/api/auth/login">Login</a>
+        <a href="/api/auth/logout">Logout</a>
+        <Profile />
       </main>
     </div>
   );

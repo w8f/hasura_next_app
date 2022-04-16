@@ -1,5 +1,6 @@
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
+import { UserProvider } from "@auth0/nextjs-auth0";
 import {
   ApolloClient,
   InMemoryCache,
@@ -15,9 +16,11 @@ const client = new ApolloClient({
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <ApolloProvider client={client}>
-      <Component {...pageProps} />;
-    </ApolloProvider>
+    <UserProvider>
+      <ApolloProvider client={client}>
+        <Component {...pageProps} />;
+      </ApolloProvider>
+    </UserProvider>
   );
 }
 
