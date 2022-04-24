@@ -1,7 +1,7 @@
-import { NextPage } from "next";
-import { useQuery } from "@apollo/client";
-import { USERS_QUERY } from "../graphql/queries/users.query";
-import { User } from "../types/index";
+import { useQuery } from '@apollo/client';
+import { NextPage } from 'next';
+import { USERS_QUERY } from '../graphql/queries/users.query';
+import { User } from '../types/index';
 
 const UsersPage: NextPage = () => {
   const { loading, error, data } = useQuery(USERS_QUERY);
