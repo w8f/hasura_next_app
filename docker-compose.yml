@@ -9,6 +9,15 @@ services:
     volumes:
       - "./front:/front"
     working_dir: /front
+  storybook:
+    image: node:17-alpine3.13
+    command: sh -c 'npm run storybook'
+    ports:
+      - "6006:6006"
+    tty: true
+    volumes:
+      - "./front:/front"
+    working_dir: /front
   postgres:
     image: postgres:14-alpine
     restart: always
