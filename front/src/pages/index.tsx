@@ -1,6 +1,6 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import Profile from '../components/Profile/Profile';
+import Link from 'next/link';
 
 const Home: NextPage = () => {
   return (
@@ -12,10 +12,15 @@ const Home: NextPage = () => {
       </Head>
 
       <main>
-        <h1 className='text-3xl font-bold underline'>Hello world!</h1>
-        <a href='/api/auth/login'>Login</a>
-        <a href='/api/auth/logout'>Logout</a>
-        <Profile />
+        <div className='bg-stone-50 min-h-screen text-center'>
+          <h1 className='text-3xl mt-10 inline-block'>Next.js and Hasura Sample app</h1>
+          <ul className='mt-4'>
+            サンプル機能
+            <li className='mt-2'>
+              <Link href='/todo'>Todoアプリ</Link>
+            </li>
+          </ul>
+        </div>
       </main>
     </div>
   );
