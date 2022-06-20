@@ -1,0 +1,19 @@
+query GetTodos {
+  todos {
+    id
+    title
+    description
+    created_at
+    updated_at
+  }
+}
+
+query GetTodosByPk($id: Int!) {
+  todos_by_pk(id: $id) {
+    id
+    created_at
+    description
+    title
+    updated_at
+  }
+}
