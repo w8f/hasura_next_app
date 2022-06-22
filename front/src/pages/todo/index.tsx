@@ -1,17 +1,17 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import { useGetTodosQuery, useGetTodosByPkQuery } from '../../generated/graphql';
+import { useTodos } from './useTodos';
 
 const Todo: NextPage = () => {
-  const param = {
-    id: 1,
-  };
-  const { data, loading, error } = useGetTodosQuery();
-  // const { data, loading, error } = useGetTodosByPkQuery({
-  //   variables: {
-  //     id: 10,
-  //   },
-  // });
+  const { data, formData, loading, onClickAddTodos, onInputChange, onClickDeleteTodo } = useTodos();
+
+  if (loading) {
+    return (
+      <div className='bg-stone-50 flex justify-center min-h-screen items-center'>
+        <div className='animate-spin h-10 w-10 border-4 border-blue-500 rounded-full border-t-transparent'></div>
+      </div>
+    );
+  }
 
   return (
     <div className='text-center bg-stone-50 min-h-screen'>
@@ -21,18 +21,54 @@ const Todo: NextPage = () => {
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <h1 className='text-2xl mt-10 inline-block'>Todo app</h1>
+      <form>
+        <div className='flex justify-center m-4'>
+          <label className='mr-4' htmlFor='title'>
+            Title:
+          </label>
+          <input
+            className='bg-white border border-gray-800'
+            type='text'
+            name='title'
+            value={formData.title}
+            onChange={onInputChange}
+          ></input>
+        </div>
+        <div className='flex justify-center m-4'>
+          <label className='mr-4' htmlFor='description'>
+            Description:
+          </label>
+          <textarea
+            className='bg-white border border-gray-800'
+            name='description'
+            rows={3}
+            cols={30}
+            value={formData.description ?? ''}
+            onChange={onInputChange}
+          ></textarea>
+        </div>
+      </form>
+      <button
+        className='bg-white hover:bg-slate-50 border-2 rounded-md p-2'
+        onClick={onClickAddTodos}
+      >
+        add Todo!
+      </button>
       {data && (
-        <div className='mt-2'>
-          {/* <p>{data.todos_by_pk?.title}</p>
-          <p>{data.todos_by_pk?.description}</p>
-          <p>{data.todos_by_pk?.created_at}</p>
-          <p>{data.todos_by_pk?.updated_at}</p> */}
-          {data.todos.map(({ id, title, description, created_at, updated_at }) => (
-            <div key={id} className='m-6'>
-              <p>{title}</p>
-              <p>{description}</p>
-              <p>{created_at}</p>
-              <p>{updated_at}</p>
+        <div className='mt-2 grid grid-cols-3'>
+          {data.todos.map((todo) => (
+            <div key={todo.id} className='m-6 bg-slate-100 border-2 p-2'>
+              <button
+                className='bg-slate-600 hover:bg-slate-500 text-white p-1 m-1'
+                onClick={() => onClickDeleteTodo(todo.id)}
+              >
+                削除
+              </button>
+              <button className='bg-slate-600 hover:bg-slate-500 text-white p-1 m-1'>更新</button>
+              <p>{todo.title}</p>
+              <p>{todo.description}</p>
+              <p>{todo.created_at}</p>
+              <p>{todo.updated_at}</p>
             </div>
           ))}
         </div>

@@ -1,0 +1,9 @@
+mutation AddTodos($description: String = "", $title: String = "") {
+  insert_todos_one(object: { description: $description, title: $title }) {
+    id
+    title
+    description
+    created_at
+    updated_at
+  }
+}

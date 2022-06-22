@@ -1,5 +1,5 @@
 query GetTodos {
-  todos {
+  todos(order_by: { updated_at: asc }) {
     id
     title
     description

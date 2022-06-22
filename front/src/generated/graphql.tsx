@@ -705,6 +705,32 @@ export type Users_Variance_Fields = {
   id?: Maybe<Scalars['Float']>;
 };
 
+export type AddTodosMutationVariables = Exact<{
+  description?: InputMaybe<Scalars['String']>;
+  title?: InputMaybe<Scalars['String']>;
+}>;
+
+export type AddTodosMutation = {
+  __typename?: 'mutation_root';
+  insert_todos_one?: {
+    __typename?: 'todos';
+    id: number;
+    title: string;
+    description?: string | null;
+    created_at: any;
+    updated_at: any;
+  } | null;
+};
+
+export type DeleteTodosByPkMutationVariables = Exact<{
+  id: Scalars['Int'];
+}>;
+
+export type DeleteTodosByPkMutation = {
+  __typename?: 'mutation_root';
+  delete_todos_by_pk?: { __typename?: 'todos'; title: string } | null;
+};
+
 export type GetTodosQueryVariables = Exact<{ [key: string]: never }>;
 
 export type GetTodosQuery = {
@@ -735,9 +761,102 @@ export type GetTodosByPkQuery = {
   } | null;
 };
 
+export const AddTodosDocument = gql`
+  mutation AddTodos($description: String = "", $title: String = "") {
+    insert_todos_one(object: { description: $description, title: $title }) {
+      id
+      title
+      description
+      created_at
+      updated_at
+    }
+  }
+`;
+export type AddTodosMutationFn = Apollo.MutationFunction<
+  AddTodosMutation,
+  AddTodosMutationVariables
+>;
+
+/**
+ * __useAddTodosMutation__
+ *
+ * To run a mutation, you first call `useAddTodosMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useAddTodosMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [addTodosMutation, { data, loading, error }] = useAddTodosMutation({
+ *   variables: {
+ *      description: // value for 'description'
+ *      title: // value for 'title'
+ *   },
+ * });
+ */
+export function useAddTodosMutation(
+  baseOptions?: Apollo.MutationHookOptions<AddTodosMutation, AddTodosMutationVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<AddTodosMutation, AddTodosMutationVariables>(AddTodosDocument, options);
+}
+export type AddTodosMutationHookResult = ReturnType<typeof useAddTodosMutation>;
+export type AddTodosMutationResult = Apollo.MutationResult<AddTodosMutation>;
+export type AddTodosMutationOptions = Apollo.BaseMutationOptions<
+  AddTodosMutation,
+  AddTodosMutationVariables
+>;
+export const DeleteTodosByPkDocument = gql`
+  mutation DeleteTodosByPk($id: Int!) {
+    delete_todos_by_pk(id: $id) {
+      title
+    }
+  }
+`;
+export type DeleteTodosByPkMutationFn = Apollo.MutationFunction<
+  DeleteTodosByPkMutation,
+  DeleteTodosByPkMutationVariables
+>;
+
+/**
+ * __useDeleteTodosByPkMutation__
+ *
+ * To run a mutation, you first call `useDeleteTodosByPkMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteTodosByPkMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteTodosByPkMutation, { data, loading, error }] = useDeleteTodosByPkMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useDeleteTodosByPkMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    DeleteTodosByPkMutation,
+    DeleteTodosByPkMutationVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<DeleteTodosByPkMutation, DeleteTodosByPkMutationVariables>(
+    DeleteTodosByPkDocument,
+    options,
+  );
+}
+export type DeleteTodosByPkMutationHookResult = ReturnType<typeof useDeleteTodosByPkMutation>;
+export type DeleteTodosByPkMutationResult = Apollo.MutationResult<DeleteTodosByPkMutation>;
+export type DeleteTodosByPkMutationOptions = Apollo.BaseMutationOptions<
+  DeleteTodosByPkMutation,
+  DeleteTodosByPkMutationVariables
+>;
 export const GetTodosDocument = gql`
   query GetTodos {
-    todos {
+    todos(order_by: { updated_at: asc }) {
       id
       title
       description
