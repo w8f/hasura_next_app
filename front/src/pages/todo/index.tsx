@@ -1,9 +1,10 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
+import { TodoForm } from '../../components/TodoForm';
 import { useTodos } from './useTodos';
 
 const Todo: NextPage = () => {
-  const { data, formData, loading, onClickAddTodos, onInputChange, onClickDeleteTodo } = useTodos();
+  const { data, loading, onClickDeleteTodo } = useTodos();
 
   if (loading) {
     return (
@@ -21,39 +22,7 @@ const Todo: NextPage = () => {
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <h1 className='text-2xl mt-10 inline-block'>Todo app</h1>
-      <form>
-        <div className='flex justify-center m-4'>
-          <label className='mr-4' htmlFor='title'>
-            Title:
-          </label>
-          <input
-            className='bg-white border border-gray-800'
-            type='text'
-            name='title'
-            value={formData.title}
-            onChange={onInputChange}
-          ></input>
-        </div>
-        <div className='flex justify-center m-4'>
-          <label className='mr-4' htmlFor='description'>
-            Description:
-          </label>
-          <textarea
-            className='bg-white border border-gray-800'
-            name='description'
-            rows={3}
-            cols={30}
-            value={formData.description ?? ''}
-            onChange={onInputChange}
-          ></textarea>
-        </div>
-      </form>
-      <button
-        className='bg-white hover:bg-slate-50 border-2 rounded-md p-2'
-        onClick={onClickAddTodos}
-      >
-        add Todo!
-      </button>
+      <TodoForm />
       {data && (
         <div className='mt-2 grid grid-cols-3'>
           {data.todos.map((todo) => (
