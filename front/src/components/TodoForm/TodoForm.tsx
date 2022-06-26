@@ -1,11 +1,14 @@
 import { FC } from 'react';
-import { useTodoForm } from './useTodoForm';
+import { useTodoForm, TodoFormProps } from './useTodoForm';
 
 /**
  * Todo入力コンポーネント
  */
-export const TodoForm: FC = () => {
-  const { formData, onInputChange, onClickAddTodos } = useTodoForm();
+export const TodoForm: FC<TodoFormProps> = ({ mode, updateItem }) => {
+  const { formData, onInputChange, onClickAddTodos, onClickUpdateTodos } = useTodoForm({
+    mode,
+    updateItem,
+  });
   return (
     <>
       <form>
@@ -35,12 +38,22 @@ export const TodoForm: FC = () => {
           ></textarea>
         </div>
       </form>
-      <button
-        className='bg-white hover:bg-slate-50 border-2 rounded-md p-2'
-        onClick={onClickAddTodos}
-      >
-        add Todo!
-      </button>
+      {mode === 'add' && (
+        <button
+          className='bg-white hover:bg-slate-50 border-2 rounded-md p-2'
+          onClick={onClickAddTodos}
+        >
+          add Todo!
+        </button>
+      )}
+      {mode === 'update' && (
+        <button
+          className='bg-white hover:bg-slate-50 border-2 rounded-md p-2'
+          onClick={onClickUpdateTodos}
+        >
+          update Todo!
+        </button>
+      )}
     </>
   );
 };

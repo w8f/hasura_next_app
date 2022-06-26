@@ -1,7 +1,9 @@
+import { useRouter } from 'next/router';
 import { useCallback } from 'react';
 import { useGetTodosQuery, useDeleteTodosByPkMutation } from '../../generated/graphql';
 
 export const useTodoCard = () => {
+  const router = useRouter();
   const [deleteTodosByPkMutation] = useDeleteTodosByPkMutation();
   const { refetch } = useGetTodosQuery();
 
@@ -20,7 +22,12 @@ export const useTodoCard = () => {
     [deleteTodosByPkMutation, refetch],
   );
 
+  const onClickUpdateTodo = (id: number) => {
+    router.push(`todo/${id}`);
+  };
+
   return {
     onClickDeleteTodo,
+    onClickUpdateTodo,
   };
 };

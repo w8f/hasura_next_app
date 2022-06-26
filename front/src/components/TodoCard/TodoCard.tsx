@@ -9,7 +9,7 @@ import { useTodoCard } from './useTodoCard';
  * @param todos
  */
 export const TodoCard: FC<Todos> = ({ id, title, description, created_at, updated_at }) => {
-  const { onClickDeleteTodo } = useTodoCard();
+  const { onClickDeleteTodo, onClickUpdateTodo } = useTodoCard();
   return (
     <div key={id} className='m-6 bg-slate-100 border-2 p-2'>
       <button
@@ -18,7 +18,12 @@ export const TodoCard: FC<Todos> = ({ id, title, description, created_at, update
       >
         削除
       </button>
-      <button className='bg-slate-600 hover:bg-slate-500 text-white p-1 m-1'>更新</button>
+      <button
+        className='bg-slate-600 hover:bg-slate-500 text-white p-1 m-1'
+        onClick={() => onClickUpdateTodo(id)}
+      >
+        更新
+      </button>
       <p>{title}</p>
       <p>{description}</p>
       <p>{created_at}</p>

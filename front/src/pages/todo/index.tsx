@@ -21,7 +21,7 @@ const Todo: NextPage = () => {
       </Head>
       <main>
         <h1 className='text-2xl mt-10 inline-block'>Todo app</h1>
-        <TodoForm />
+        <TodoForm mode='add' />
         {data && (
           <div className='mt-2 grid grid-cols-3'>
             {data.todos.map((todo) => (

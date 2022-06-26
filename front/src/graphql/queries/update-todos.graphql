@@ -1,0 +1,9 @@
+mutation UpdateTodosByPk($description: String = "", $title: String = "", $id: Int!) {
+  update_todos_by_pk(pk_columns: { id: $id }, _set: { description: $description, title: $title }) {
+    id
+    title
+    description
+    created_at
+    updated_at
+  }
+}
