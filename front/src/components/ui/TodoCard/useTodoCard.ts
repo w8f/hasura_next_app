@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import { useCallback } from 'react';
-import { useGetTodosQuery, useDeleteTodosByPkMutation } from '../../generated/graphql';
+import { useGetTodosQuery, useDeleteTodosByPkMutation } from '../../../generated/graphql';
 
 export const useTodoCard = () => {
   const router = useRouter();

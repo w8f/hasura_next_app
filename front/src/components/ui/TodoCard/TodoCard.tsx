@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Todos } from '../../generated/graphql';
+import { Todos } from '../../../generated/graphql';
 import { useTodoCard } from './useTodoCard';
 
 /**

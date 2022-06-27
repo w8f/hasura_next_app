@@ -5,7 +5,7 @@ import {
   useAddTodosMutation,
   useGetTodosQuery,
   useUpdateTodosByPkMutation,
-} from '../../generated/graphql';
+} from '../../../generated/graphql';
 
 type Input = Pick<Todos, 'title' | 'description'>;
 
