@@ -7,7 +7,7 @@ import {
   useUpdateTodosByPkMutation,
 } from '../../../generated/graphql';
 
-type Input = Pick<Todos, 'title' | 'description'>;
+export type Input = Pick<Todos, 'title' | 'description'>;
 
 export type TodoFormProps = {
   mode: 'add' | 'update';

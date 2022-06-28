@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { Todos } from '../../../generated/graphql';
-import { useTodoCard } from './useTodoCard';
+import { useTodoCard } from './TodoCard.hooks';
 
 /**
  * Todo Card コンポーネント

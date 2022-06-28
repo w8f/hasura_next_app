@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { useTodoForm, TodoFormProps } from './useTodoForm';
+import { useTodoForm, TodoFormProps } from './TodoForm.hooks';
 
 /**
  * Todo入力コンポーネント
